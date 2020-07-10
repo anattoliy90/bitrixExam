@@ -6,9 +6,9 @@ $APPLICATION->IncludeComponent(
 	Array(
 		"CACHE_TIME" => "3600",
 		"CACHE_TYPE" => "A",
-		"CATALOG_IBLOCK" => "1",
-		"NEWS_IBLOCK" => "2",
-		"PROP_NEWS_LINK" => "test"
+		"CATALOG_IBLOCK" => "2",
+		"NEWS_IBLOCK" => "1",
+		"PROP_NEWS_LINK" => "UF_NEWS_LINK"
 	)
 );
 

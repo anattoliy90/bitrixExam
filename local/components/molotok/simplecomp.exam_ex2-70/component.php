@@ -57,6 +57,4 @@ if($this->StartResultCache()) {
 	$this->IncludeComponentTemplate();
 }
 
-$title = GetMessage['COUNT_CATALOG_ITEMS'] . $count;
-
-$APPLICATION->SetTitle($title);
+$APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $count);

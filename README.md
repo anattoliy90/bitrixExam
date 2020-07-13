@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- 3. [ex2-70] Разработать простой компонент «Каталог товаров»
+- 4. [ex2-82] Добавить отображение данных в шаблон сайта

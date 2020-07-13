@@ -8,4 +8,11 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
+	Array(
+		"Простой компонент", 
+		"simplecomp/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
 );

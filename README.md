@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- 4. [ex2-82] Добавить отображение данных в шаблон сайта
+- 5. [ex2-25] Создание комплексного компонента «Моя фотогалерея»

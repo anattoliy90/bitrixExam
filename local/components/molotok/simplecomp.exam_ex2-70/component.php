@@ -51,6 +51,9 @@ if($this->StartResultCache()) {
 	}
 	
 	$count = count($catalogItems);
+	$prices = array_column($catalogItems, 'PROPERTY_PRICE_VALUE');
+	$minPrice = GetMessage('MIN_PRICE') . min($prices);
+	$maxPrice = GetMessage('MAX_PRICE') . max($prices);
 	$arResult['NEWS'] = $newsItems;
 
 	$this->SetResultCacheKeys([]);
@@ -58,3 +61,6 @@ if($this->StartResultCache()) {
 }
 
 $APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $count);
+
+$APPLICATION->AddViewContent('minPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $minPrice . '</div>');
+$APPLICATION->AddViewContent('maxPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $maxPrice . '</div>');

@@ -7,6 +7,7 @@ $arComponentDescription = array(
 	"CACHE_PATH" => "Y",
 	"SORT" => 100,
 	"PATH" => array(
-		"ID" => GetMessage("EX2"),
+		"ID" => "exam2",
+		"NAME" => GetMessage("EX2"),
 	),
 );

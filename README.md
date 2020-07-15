@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- 5. [ex2-25] Создание комплексного компонента «Моя фотогалерея»
+- Билет 2

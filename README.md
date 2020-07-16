@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- Билет 2
+- 2. [ex2-95] Упростить меню в адмистративном разделе для контент-менеджера

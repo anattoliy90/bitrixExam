@@ -1,7 +1,8 @@
 <?
 use Bitrix\Main\Localization\Loc;
 
-AddEventHandler("main", "OnBeforeEventAdd", array("MyClass", "OnBeforeEventAddHandler"));
+AddEventHandler("main", "OnBeforeEventAdd", ["MyClass", "OnBeforeEventAddHandler"]);
+AddEventHandler("main", "OnBuildGlobalMenu", ["MyClass", "OnBuildGlobalMenuHandler"]);
 
 class MyClass
 {
@@ -23,5 +24,20 @@ class MyClass
                 "DESCRIPTION" => "Замена данных в отсылаемом письме – " . $arFields["AUTHOR"],
             ));
         }
+	}
+	
+	function OnBuildGlobalMenuHandler(&$aGlobalMenu, &$aModuleMenu) {
+		global $USER;
+		$groups = CUser::GetUserGroup($USER->GetID());
+		
+		if (in_array(5, $groups) && !$USER->IsAdmin()) {
+			unset($aGlobalMenu['global_menu_desktop']);
+			
+			foreach ($aModuleMenu as $menuKey => $menu) {
+				if ($menu['items_id'] == 'menu_iblock' && $menu['parent_menu'] == 'global_menu_content') {
+					unset($aModuleMenu[$menuKey]);
+				}
+			}
+		}
 	}
 }

@@ -1,7 +1,7 @@
 <? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->IncludeComponent(
-	"molotok:complexcomp.exam-materials", 
+	"molotok:complexcomp.exam_ex2-25", 
 	".default", 
 	array(
 		"AJAX_MODE" => "N",

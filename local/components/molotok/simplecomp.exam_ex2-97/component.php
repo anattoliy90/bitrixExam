@@ -10,16 +10,17 @@ if(!Loader::includeModule("iblock"))
 	return;
 }
 
-if(intval($arParams["NEWS_IBLOCK_ID"]) > 0 && $this->StartResultCache(false, $USER->GetID())) {
+if($USER->IsAuthorized() && intval($arParams["NEWS_IBLOCK_ID"]) > 0 && $this->StartResultCache(false, $USER->GetID())) {
 	// current user
 	$rsUser = CUser::GetByID($USER->GetID());
 	$curUser = $rsUser->Fetch();
 	
-	// user
+	// get users
 	$arOrderUser = array("id");
 	$sortOrder = "asc";
 	$arFilterUser = array(
 		"ACTIVE" => "Y",
+		"!ID" => $curUser["ID"],
 		$arParams["AUTHOR_TYPE_PROP_CODE"] => $curUser["UF_AUTHOR_TYPE"],
 	);
 	$arSelect = [
@@ -33,7 +34,7 @@ if(intval($arParams["NEWS_IBLOCK_ID"]) > 0 && $this->StartResultCache(false, $US
 		$arResult["USERS"][] = $arUser;
 	}
 	
-	// news
+	// get news
 	$arSelectElems = array (
 		"ID",
 		"IBLOCK_ID",
@@ -44,18 +45,14 @@ if(intval($arParams["NEWS_IBLOCK_ID"]) > 0 && $this->StartResultCache(false, $US
 	$arFilterElems = array (
 		"IBLOCK_ID" => $arParams["NEWS_IBLOCK_ID"],
 		"ACTIVE" => "Y",
-		//array(
-		//	"LOGIC" => "OR",
-		//	array("<PROPERTY_RADIUS" => 50, "=PROPERTY_CONDITION" => "Y"),
-		//	array(">=PROPERTY_RADIUS" => 50, "!=PROPERTY_CONDITION" => "Y"),
-		//),
 	);
 	$arSortElems = array (
 		"NAME" => "ASC",
 	);
 	
 	$curUserNews = [];
-	$arResult["NEWS"] = array();
+	$arResult["NEWS"] = [];
+	
 	$rsElements = CIBlockElement::GetList($arSortElems, $arFilterElems, false, false, $arSelectElems);
 	while($arElement = $rsElements->GetNext()) {
 		$arResult["NEWS"][] = $arElement;
@@ -65,19 +62,24 @@ if(intval($arParams["NEWS_IBLOCK_ID"]) > 0 && $this->StartResultCache(false, $US
 		}
 	}
 	
+	$arResult["COUNT"] = [];
+	
 	foreach ($arResult["USERS"] as $userKey => $user) {
 		foreach ($arResult["NEWS"] as $news) {
-			if (
-				$user["ID"] == $curUser["ID"] && $user["ID"] == $news["PROPERTY_" . $arParams["AUTHOR_PROP_CODE"] . "_VALUE"]
-				|| $user["ID"] != $curUser["ID"] && !in_array($news["ID"], $curUserNews) && $user["ID"] == $news["PROPERTY_" . $arParams["AUTHOR_PROP_CODE"] . "_VALUE"]
-				) {
+			if ($user["ID"] == $news["PROPERTY_" . $arParams["AUTHOR_PROP_CODE"] . "_VALUE"] && !in_array($news["ID"], $curUserNews)) {
 				$arResult["USERS"][$userKey]["NEWS"][] = $news;
+				
+				if (!in_array($news["ID"], $arResult["COUNT"])) {
+					$arResult["COUNT"][] = $news["ID"];
+				}
 			}
 		}
 	}
 	
-	echo "<pre>";print_r($curUserNews);echo "</pre>";
-	echo "<pre>";print_r($arResult["USERS"]);echo "</pre>";
+	$arResult["COUNT"] = count($arResult["COUNT"]);
+	
+	$this->SetResultCacheKeys(["COUNT"]);
+	$this->includeComponentTemplate();
 }
 
-$this->includeComponentTemplate();	
+$APPLICATION->SetTitle('Новостей [' . $arResult["COUNT"] . ']');

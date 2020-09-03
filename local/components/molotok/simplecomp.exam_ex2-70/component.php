@@ -60,6 +60,16 @@ if($this->StartResultCache()) {
 	$this->IncludeComponentTemplate();
 }
 
+$this->AddIncludeAreaIcons(
+    array(
+        array(
+            'URL' => '/bitrix/admin/iblock_element_admin.php?IBLOCK_ID=' . $arParams['CATALOG_IBLOCK'] . '&type=products&lang=ru&find_el_y=Y&clear_filter=Y&apply_filter=Y',
+            'TITLE' => 'ИБ в админке',
+			'IN_PARAMS_MENU' => true,
+        ),
+    )
+);
+
 $APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $count);
 
 $APPLICATION->AddViewContent('minPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $minPrice . '</div>');

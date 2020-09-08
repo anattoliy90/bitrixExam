@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- 5. [ex2-102] Добавить англоязычную версию сайта (один инфоблок) (На главной странице разместить компонент, выводящий список новостей)
+- Ex2AllType.pdf

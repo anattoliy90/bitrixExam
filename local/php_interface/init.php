@@ -3,6 +3,7 @@ use Bitrix\Main\Localization\Loc;
 
 AddEventHandler("main", "OnBeforeEventAdd", ["MyClass", "OnBeforeEventAddHandler"]);
 AddEventHandler("main", "OnBuildGlobalMenu", ["MyClass", "OnBuildGlobalMenuHandler"]);
+AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", ["MyClass", "OnBeforeIBlockElementUpdateHandler"]);
 
 class MyClass
 {
@@ -19,9 +20,9 @@ class MyClass
             $arFields["AUTHOR"] = $mess;
         
             CEventLog::Add(array(
-                "AUDIT_TYPE_ID" => "Замена данных в отсылаемом письме",
+                "AUDIT_TYPE_ID" => Loc::getMessage("REPLACE_DATA_IN_MAIL"),
                 "MODULE_ID" => "main",
-                "DESCRIPTION" => "Замена данных в отсылаемом письме – " . $arFields["AUTHOR"],
+                "DESCRIPTION" => Loc::getMessage("REPLACE_DATA_IN_MAIL") . ' - ' . $arFields["AUTHOR"],
             ));
         }
 	}
@@ -40,4 +41,20 @@ class MyClass
 			}
 		}
 	}
+	
+	function OnBeforeIBlockElementUpdateHandler(&$arFields)
+    {
+		$showCounter = 0;
+		
+		$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 2, 'ID' => $arFields['ID']], false, false, ['ID', 'SHOW_COUNTER']);
+		if ($ob = $res->GetNext()) {
+			$showCounter = $ob['SHOW_COUNTER'];
+		}
+		
+		if ($showCounter > 2 && $arFields['ACTIVE'] == 'N') {
+			global $APPLICATION;
+			$APPLICATION->throwException(Loc::getMessage("ERROR_TEXT_1") . $showCounter . Loc::getMessage("ERROR_TEXT_2"));
+			return false;
+		}
+    }
 }

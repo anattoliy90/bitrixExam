@@ -4,6 +4,7 @@ use Bitrix\Main\Localization\Loc;
 AddEventHandler("main", "OnBeforeEventAdd", ["MyClass", "OnBeforeEventAddHandler"]);
 AddEventHandler("main", "OnBuildGlobalMenu", ["MyClass", "OnBuildGlobalMenuHandler"]);
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", ["MyClass", "OnBeforeIBlockElementUpdateHandler"]);
+AddEventHandler("main", "OnEpilog", ["MyClass", "OnEpilogHandler"]);
 
 class MyClass
 {
@@ -42,8 +43,7 @@ class MyClass
 		}
 	}
 	
-	function OnBeforeIBlockElementUpdateHandler(&$arFields)
-    {
+	function OnBeforeIBlockElementUpdateHandler(&$arFields) {
 		$showCounter = 0;
 		
 		$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 2, 'ID' => $arFields['ID']], false, false, ['ID', 'SHOW_COUNTER']);
@@ -57,4 +57,15 @@ class MyClass
 			return false;
 		}
     }
+	
+	function OnEpilogHandler() {
+		if (defined('ERROR_404') && ERROR_404 == 'Y') {
+			CEventLog::Add(array(
+				"SEVERITY" => "INFO",
+				"AUDIT_TYPE_ID" => "ERROR_404",
+				"MODULE_ID" => "main",
+				"DESCRIPTION" => $_SERVER['REQUEST_URI'],
+			));
+		}
+	}
 }

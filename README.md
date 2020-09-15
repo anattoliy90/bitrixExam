@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- Ex2AllType.pdf - [ex2-94] Супер инструмент SEO специалиста 
+- Ex2AllType.pdf - [ex2-70] Разработать простой компонент «Каталог товаров» 

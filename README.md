@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- Ex2AllType.pdf - [ex2-70] Разработать простой компонент «Каталог товаров» 
+- Ex2AllType.pdf - [ex2-71] Разработать простой компонент «Каталог товаров»

@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- Ex2AllType.pdf - [ex2-97] Разработать простой компонент «Новости по интересам»
+- Ex2AllType.pdf - [ex2-49] Добавить дополнительную фильтрацию элементов в созданный простой компонент «Каталог товаров»

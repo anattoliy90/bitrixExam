@@ -19,7 +19,6 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 	$items = [];
 	
 	$res = CIBlockElement::GetList([], ['IBLOCK_ID' => $arParams['FIRM_IBLOCK_ID'], 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, false, ['ID', 'NAME']);
-	// $rsIBlockElement->SetUrlTemplates($arParams['DETAIL_URL']);
 	while ($ob = $res->GetNext()) {
 		$arResult['FIRMS'][] = [
 			'ID' => $ob['ID'],
@@ -30,7 +29,8 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 	$arResult['FIRM_COUNT'] = count($arResult['FIRMS']);
 	$firmId = array_column($arResult['FIRMS'], 'ID');
 	
-	$result = CIBlockElement::GetList([], ['IBLOCK_ID' => $arParams['CATALOG_IBLOCK_ID'], 'PROPERTY_' . $arParams['PROPERTY_CODE'] => $firmId, 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, false, ['ID', 'NAME', 'PROPERTY_' . $arParams['PROPERTY_CODE'], 'PROPERTY_PRICE', 'PROPERTY_MATERIAL', 'PROPERTY_ARTNUMBER', 'DETAIL_PAGE_URL']);
+	$result = CIBlockElement::GetList(['NAME' => 'ASC', 'SORT' => 'ASC'], ['IBLOCK_ID' => $arParams['CATALOG_IBLOCK_ID'], 'PROPERTY_' . $arParams['PROPERTY_CODE'] => $firmId, 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, false, ['ID', 'NAME', 'PROPERTY_' . $arParams['PROPERTY_CODE'], 'PROPERTY_PRICE', 'PROPERTY_MATERIAL', 'PROPERTY_ARTNUMBER', 'DETAIL_PAGE_URL']);
+	$result->SetUrlTemplates($arParams['DETAIL_URL_TEMPLATE']);
 	while ($obj = $result->GetNext()) {
 		$items[] = [
 			'ID' => $obj['ID'],

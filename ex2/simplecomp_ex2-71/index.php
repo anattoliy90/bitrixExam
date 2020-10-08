@@ -8,7 +8,7 @@ $APPLICATION->IncludeComponent(
 		"CACHE_TIME" => "3600",
 		"CACHE_TYPE" => "A",
 		"CATALOG_IBLOCK_ID" => "2",
-		"DETAIL_URL_TEMPLATE" => "",
+		"DETAIL_URL_TEMPLATE" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
 		"FIRM_IBLOCK_ID" => "5",
 		"PROPERTY_CODE" => "FIRM",
 		"COMPONENT_TEMPLATE" => ".default"

@@ -6,7 +6,7 @@
 			<li><b><?= $firm['NAME'] ?></b></li>
 			<ul>
 				<? foreach ($firm['ITEMS'] as $item): ?>
-					<li><?= $item['NAME'] ?> - <?= $item['PRICE'] ?> - <?= $item['MATERIAL'] ?> - <?= $item['ARTNUMBER'] ?> - <?= $item['DETAIL_PAGE_URL'] ?></li>
+					<li><?= $item['NAME'] ?> - <?= $item['PRICE'] ?> - <?= $item['MATERIAL'] ?> - <?= $item['ARTNUMBER'] ?> (<?= $item['DETAIL_PAGE_URL'] ?>)</li>
 				<? endforeach; ?>
 			</ul>
 		</ul>

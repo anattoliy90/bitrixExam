@@ -8,4 +8,4 @@ http://academy.1c-bitrix.ru/education/index.php?COURSE_ID=67&INDEX=Y
 
 ## Todo:
 
-- Ex2AllType.pdf - [ex2-58] Добавить управление элементами – «Эрмитаж» в созданный простой компонент «Каталог товаров»
+- Ex2AllType.pdf - [ex2-100] Добавить пункт «ИБ в админке» в выпадающем меню компонента.

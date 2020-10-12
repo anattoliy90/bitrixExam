@@ -8,8 +8,12 @@
 		<ul>
 			<li><b><?= $firm['NAME'] ?></b></li>
 			<ul>
-				<? foreach ($firm['ITEMS'] as $item): ?>
-					<li><?= $item['NAME'] ?> - <?= $item['PRICE'] ?> - <?= $item['MATERIAL'] ?> - <?= $item['ARTNUMBER'] ?> (<?= $item['DETAIL_PAGE_URL'] ?>)</li>
+				<?
+				foreach ($firm['ITEMS'] as $item):
+					$this->AddEditAction($item['ID'], $item['EDIT_LINK'], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_EDIT"));
+					$this->AddDeleteAction($item['ID'], $item['DELETE_LINK'], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+					?>
+					<li id="<?= $this->GetEditAreaId($item['ID']) ?>"><?= $item['NAME'] ?> - <?= $item['PRICE'] ?> - <?= $item['MATERIAL'] ?> - <?= $item['ARTNUMBER'] ?> (<?= $item['DETAIL_PAGE_URL'] ?>)</li>
 				<? endforeach; ?>
 			</ul>
 		</ul>

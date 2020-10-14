@@ -5,7 +5,7 @@ if(!isset($arParams["CACHE_TIME"])) {
 	$arParams["CACHE_TIME"] = 3600;
 }
 
-$count = 0;
+$arResult['COUNT'] = 0;
 
 if($this->StartResultCache()) {
 	if(!CModule::IncludeModule("iblock")) {
@@ -50,13 +50,13 @@ if($this->StartResultCache()) {
 		}
 	}
 	
-	$count = count($catalogItems);
+	$arResult['COUNT'] = count($catalogItems);
 	$prices = array_column($catalogItems, 'PROPERTY_PRICE_VALUE');
 	$minPrice = GetMessage('MIN_PRICE') . min($prices);
 	$maxPrice = GetMessage('MAX_PRICE') . max($prices);
 	$arResult['NEWS'] = $newsItems;
 
-	$this->SetResultCacheKeys([]);
+	$this->SetResultCacheKeys(['COUNT']);
 	$this->IncludeComponentTemplate();
 }
 
@@ -70,7 +70,7 @@ $this->AddIncludeAreaIcons(
     )
 );
 
-$APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $count);
+$APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $arResult['COUNT']);
 
 $APPLICATION->AddViewContent('minPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $minPrice . '</div>');
 $APPLICATION->AddViewContent('maxPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $maxPrice . '</div>');

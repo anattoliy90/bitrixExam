@@ -6,6 +6,8 @@ if(!isset($arParams["CACHE_TIME"])) {
 }
 
 $arResult['COUNT'] = 0;
+$arResult['MIN_PRICE'] = 0;
+$arResult['MAX_PRICE'] = 0;
 
 if($this->StartResultCache()) {
 	if(!CModule::IncludeModule("iblock")) {
@@ -52,11 +54,11 @@ if($this->StartResultCache()) {
 	
 	$arResult['COUNT'] = count($catalogItems);
 	$prices = array_column($catalogItems, 'PROPERTY_PRICE_VALUE');
-	$minPrice = GetMessage('MIN_PRICE') . min($prices);
-	$maxPrice = GetMessage('MAX_PRICE') . max($prices);
+	$arResult['MIN_PRICE'] = GetMessage('MIN_PRICE') . min($prices);
+	$arResult['MAX_PRICE'] = GetMessage('MAX_PRICE') . max($prices);
 	$arResult['NEWS'] = $newsItems;
 
-	$this->SetResultCacheKeys(['COUNT']);
+	$this->SetResultCacheKeys(['COUNT', 'MIN_PRICE', 'MAX_PRICE']);
 	$this->IncludeComponentTemplate();
 }
 
@@ -72,5 +74,5 @@ $this->AddIncludeAreaIcons(
 
 $APPLICATION->SetTitle(GetMessage('COUNT_CATALOG_ITEMS') . $arResult['COUNT']);
 
-$APPLICATION->AddViewContent('minPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $minPrice . '</div>');
-$APPLICATION->AddViewContent('maxPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $maxPrice . '</div>');
+$APPLICATION->AddViewContent('minPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $arResult['MIN_PRICE'] . '</div>');
+$APPLICATION->AddViewContent('maxPrice', '<div style="color:red; margin: 34px 15px 35px 15px">' . $arResult['MAX_PRICE'] . '</div>');

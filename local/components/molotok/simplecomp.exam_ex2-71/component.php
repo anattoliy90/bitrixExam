@@ -21,7 +21,14 @@ if (isset($_REQUEST['F'])) {
 	];
 }
 
-if ($this->StartResultCache(false, $USER->GetGroups())) {
+$arNavParams = false;
+
+if (!empty($arParams['ELEMENTS_ON_PAGE'])) {
+	$arNavParams = ['nPageSize' => $arParams['ELEMENTS_ON_PAGE']];
+	$arNavigation = CDBResult::GetNavParams($arNavParams);
+}
+
+if ($this->StartResultCache(false, [$USER->GetGroups(), $arNavigation])) {
 	if (!CModule::IncludeModule("iblock")) {
 		$this->AbortResultCache();
 		ShowError(GetMessage("IBLOCK_MODULE_NOT_INSTALLED"));
@@ -31,7 +38,7 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 	$arResult['FIRMS'] = [];
 	$items = [];
 	
-	$res = CIBlockElement::GetList([], ['IBLOCK_ID' => $arParams['FIRM_IBLOCK_ID'], 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, false, ['ID', 'NAME']);
+	$res = CIBlockElement::GetList([], ['IBLOCK_ID' => $arParams['FIRM_IBLOCK_ID'], 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, $arNavParams, ['ID', 'NAME']);
 	while ($ob = $res->GetNext()) {
 		$arResult['FIRMS'][] = [
 			'ID' => $ob['ID'],
@@ -104,6 +111,12 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 			}
 		}
 	}
+	
+	$arResult['NAV_STRING'] = $res->GetPageNavStringEx(
+		$navComponentObject,
+		GetMessage('PAGES'),
+		''
+	);
 	
 	$this->SetResultCacheKeys(['FIRM_COUNT']);
 	$this->IncludeComponentTemplate();

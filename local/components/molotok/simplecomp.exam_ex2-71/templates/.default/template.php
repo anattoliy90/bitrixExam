@@ -18,4 +18,8 @@
 			</ul>
 		</ul>
 	<? endforeach; ?>
+	
+	<p>---</p>
+	<p><b><?= GetMessage('NAVIGATION') ?></b></p>
+	<?= $arResult['NAV_STRING'] ?>
 <? endif; ?>

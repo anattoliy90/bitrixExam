@@ -11,7 +11,8 @@ $APPLICATION->IncludeComponent(
 		"DETAIL_URL_TEMPLATE" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
 		"FIRM_IBLOCK_ID" => "5",
 		"PROPERTY_CODE" => "FIRM",
-		"COMPONENT_TEMPLATE" => ".default"
+		"COMPONENT_TEMPLATE" => ".default",
+		"ELEMENTS_ON_PAGE" => "2"
 	),
 	false
 );

@@ -25,6 +25,11 @@ $arComponentParameters = array(
 			"TYPE" => "STRING",
 			"DEFAULT" => '',
 		),
+		"ELEMENTS_ON_PAGE" => array(
+			"NAME" => GetMessage("ELEMENTS_ON_PAGE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => '',
+		),
 		"CACHE_TIME"  =>  Array("DEFAULT"=>3600),
 	),
 );

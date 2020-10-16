@@ -44,6 +44,11 @@ class MyClass
 	}
 	
 	function OnBeforeIBlockElementUpdateHandler(&$arFields) {
+		// 3 - Id инфоблока Услуги
+		if ($arFields['IBLOCK_ID'] == 3) {
+			AddMessage2Log($arFields);
+		}
+		
 		$showCounter = 0;
 		
 		$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 2, 'ID' => $arFields['ID']], false, false, ['ID', 'SHOW_COUNTER']);

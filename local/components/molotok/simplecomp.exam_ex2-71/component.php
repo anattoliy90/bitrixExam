@@ -4,6 +4,8 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 use Bitrix\Main\Loader;
 
+global $CACHE_MANAGER;
+
 $arResult['FIRM_COUNT'] = 0;
 $addFilter = [];
 
@@ -40,6 +42,9 @@ if ($this->StartResultCache(false, [$USER->GetGroups(), $arNavigation])) {
 	
 	$res = CIBlockElement::GetList([], ['IBLOCK_ID' => $arParams['FIRM_IBLOCK_ID'], 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'Y'], false, $arNavParams, ['ID', 'NAME']);
 	while ($ob = $res->GetNext()) {
+		// Тегированный кеш для инфоблока Услуги
+		$CACHE_MANAGER->RegisterTag('iblock_id_3');
+		
 		$arResult['FIRMS'][] = [
 			'ID' => $ob['ID'],
 			'NAME' => $ob['NAME'],					   

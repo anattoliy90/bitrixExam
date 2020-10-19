@@ -1,5 +1,8 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die(); ?>
 
+Метка времени: <?= time() ?>
+<br><br>
+
 Фильтр: <a href="<?= $APPLICATION->GetCurPage(false) ?>?F=Y"><?= $APPLICATION->GetCurPage(false) ?>?F=Y</a>
 <br>---
 

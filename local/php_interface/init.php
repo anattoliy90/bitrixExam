@@ -43,7 +43,7 @@ class MyClass
 		}
 	}
 	
-	function OnBeforeIBlockElementUpdateHandler(&$arFields) {
+	function OnBeforeIBlockElementUpdateHandler(&$arFields) {	
 		$showCounter = 0;
 		
 		$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 2, 'ID' => $arFields['ID']], false, false, ['ID', 'SHOW_COUNTER']);

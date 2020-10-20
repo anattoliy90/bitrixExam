@@ -68,11 +68,11 @@ class MyClass
 			));
 		}
 		
-		$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 5, '=NAME' => $_SERVER['REQUEST_URI']], false, false, ['ID', 'NAME', 'PROPERTY_TITLE', 'PROPERTY_DESCRIPTION']);
+		/*$res = CIBlockElement::GetList([], ['IBLOCK_ID' => 5, '=NAME' => $_SERVER['REQUEST_URI']], false, false, ['ID', 'NAME', 'PROPERTY_TITLE', 'PROPERTY_DESCRIPTION']);
 		if ($ob = $res->GetNext()) {
 			global $APPLICATION;
 			$APPLICATION->SetTitle($ob['PROPERTY_TITLE_VALUE']);
 			$APPLICATION->SetPageProperty('description', $ob['PROPERTY_DESCRIPTION_VALUE']);
-		}
+		}*/
 	}
 }

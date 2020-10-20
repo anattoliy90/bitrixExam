@@ -29,16 +29,23 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
-		Array(
+	Array(
 		"Второй сайт", 
 		"site2/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
-		Array(
+	Array(
 		"Простой компонент ex2-71", 
 		"simplecomp_ex2-71/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Оценка производительности ex2-88", 
+		"time_control_ex2-88/", 
 		Array(), 
 		Array(), 
 		"" 
